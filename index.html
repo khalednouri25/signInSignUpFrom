@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+                <meta charset="utf-8"/>
+        <meta name="viewport"  width=device-width" initial-scale=1/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+<body>
+    <script src="jquery.min.js"></script>
+    <!--create navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" id="clickHere" href="#" tabindex="-1" aria-disabled="true">Sign in</a>
+               <script>
+                   $('#clickHere').click(function()
+                   {
+                    $('.signIndiv').show()
+                    $('.signUpdiv').hide()
+                   })
+               </script>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="clickHere1" href="#" tabindex="-1" aria-disabled="true">Sign up</a>
+               <script>
+                   $('#clickHere1').click(function()
+                   {
+                    $('.signUpdiv').show()
+                    $('.signIndiv').hide()
+
+                   })
+               </script>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+  
+<div class="container-fluid bg">
+    
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+        </div>
+        <!-- sign in form-->
+        <div class="col-md-4 col-sm-4 col-xs-12 signIndiv">
+            <form id="formSignIn" class="form-container signIn" novalidate onsubmit="return false">
+                <h3>Please complete the following fields:</h3>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control " id="email1" aria-describedby="emailHelp" placeholder="Email" required >
+                </div>
+                <p class="errorFields" id="erroremail1" style="color: red;"></p>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="password1" placeholder="Password" required>
+                </div>
+                <p class="errorFields" id="errorpassword1" style="color: red;"></p>
+               
+                  <button type="submit" class="btn btn-block btn-success" onclick="signIn()">Submit</button>
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                  </div>
+                  <div>Don't  have an acount? <button type="button" class="btn btn-link btnSignIn">Sign up here</button></div>
+              </form>
+        </div>
+          <!-- sign up form-->
+        <div class="col-md-4 col-sm-4 col-xs-12 signUpdiv" >
+            <form class="form-container signUp" novalidate onsubmit="return false">
+                <h3>Please complete the following fields:</h3>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Family name:</label>
+                    <input type="text" class="form-control" id="family_name"  placeholder="Family name" required>
+                    <p class="errorFields" id="error_family_name" style="color: red;"></p>
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">First name:</label>
+                    <input type="text" class="form-control" id="first_name"  placeholder="First name" required>
+                    <p class="errorFields" id="error_first_name" style="color: red;"></p>
+                </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="emailSignUp" aria-describedby="emailHelp" placeholder="Email" required>
+                    <p class="errorFields" id="error_email" style="color: red;"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="passwordSignUp" placeholder="Password" required>
+                    <p class="errorFields" id="error_password" style="color: red;"></p>
+                </div>
+                
+                <button type="submit" class="btn btn-block btn-success" onclick="signUp()">Submit</button>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck2" required>
+                    <label class="form-check-label" for="exampleCheck2">Remember me</label>
+                </div>
+                <div>Already have an acount? <button type="button" class="btn btn-link btnSignUp">Sign in here</button></div>
+              </form>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+        </div>
+    </div>
+</div>
+<script>
+         $('.signUpdiv').hide()
+         $('.signIndiv').hide()
+         $('.btnSignUp').click(function(){
+         $('.signUpdiv').hide()
+         $('.signIndiv').show()
+   })
+   $('.btnSignIn').click(function(){
+        $('.signIndiv').hide()
+        $('.signUpdiv').show()
+    })
+/*function for sign in form*/
+function signIn(){
+    /*get values of email and password of form sign in*/
+        var email =document.getElementById("email1").value
+        var password=document.getElementById("password1").value
+        error=false        
+        document.getElementById('email1').classList.remove('bg-danger')
+
+        document.getElementById('password1').classList.remove('bg-danger')
+    /*check if fields ar not empty*/
+    if( email===""){
+        document.getElementById('email1').classList.add('bg-danger')
+        document.getElementById('erroremail1').innerHTML='You must enter your mail!'
+        error= true
+    }
+
+    if(password ==="")
+    {
+        document.getElementById('password1').classList.add('bg-danger')
+        document.getElementById('errorpassword1').innerHTML='You must enter your password!'
+        error= true
+    }
+
+    if(password !=="")
+    {
+        document.getElementById('password1').classList.remove('bg-danger')
+        document.getElementById('errorpassword1').innerHTML=''
+    }
+
+    if( email!==""){
+        document.getElementById('email1').classList.remove('bg-danger')
+        document.getElementById('erroremail1').innerHTML=''
+
+    }
+  
+    
+    if(email !=='')
+    {
+        document.getElementById('email1').classList.remove('bg-danger')
+    /*check if @ exists in email*/
+    var index_search_char1 = email.indexOf('@')
+    var index_search_char2 = email.indexOf('@', (index_search_char1+1))
+    if(index_search_char2 > 0)
+    {
+        /*there is more than one @ in the email, so error*/
+        document.getElementById('email1').classList.add('bg-danger')
+        document.getElementById('erroremail1').innerHTML='Your email must have only one "@", please enter a good email!'
+        error= true
+
+    }
+    else 
+    {
+    if(index_search_char1 < 0)
+    {
+       /*there is no @ in the email, so error*/
+        document.getElementById('erroremail1').innerHTML='Your email must have a "@",  please enter a good email!'
+        document.getElementById('email1').classList.add('bg-danger')
+        error= true
+    }
+    }
+    var index_of_point= email.indexOf('.')
+    if(index_of_point < 0)
+    {
+      /*there is no . exists in  email, so error*/
+        document.getElementById('erroremail1').innerHTML='You must enter a good email (you have forgetten a "." )!'
+        document.getElementById('email1').classList.add('bg-danger')
+        error= true
+    }
+    }
+   if(error===false){
+        document.getElementById('email1').classList.remove('bg-danger')
+        document.getElementById('password1').classList.remove('bg-danger')
+        /*if there is no problems in the fields so, create connection with the server*/
+         //creating a XHR Object
+         let xhr= new XMLHttpRequest();
+         let url="get_info_users_signIn.php";
+          //open a connection
+        xhr.open("POST",url, true)
+        //send the request header i.e. which type of conent you are sending
+        xhr.setRequestHeader("Content-Type", "application/json");
+       //Create a state change callback
+        xhr.onreadystatechange=function() {
+    
+    if(xhr.readyState==4 && xhr.status ===200)
+    {
+        var textResp=xhr.responseText
+        var myObject=JSON.parse(textResp)
+        myText=myObject.id
+        if(myText=== -1){
+    /*the email or password is incorrect, so error*/
+        alert("Your email or password is incorrect, please try again!")
+    }
+    else{
+        alert("Authentification successful, Welcome")
+    }
+}
+ };
+       //Converting JSON data to string
+       var data=JSON.stringify({"mail": email, "password":password});
+       //Sending data with the resquest
+      xhr.send(data);
+    }
+    }
+function signUp()
+{
+        var family_name =document.getElementById("family_name").value
+        var first_name=document.getElementById("first_name").value
+        var email =document.getElementById("emailSignUp").value
+        var password=document.getElementById("passwordSignUp").value
+  
+     error=false
+    if( email!=="")
+    {
+        document.getElementById('emailSignUp').classList.remove('bg-danger')
+        document.getElementById("error_email").innerHTML=''
+    }
+        if( password!=="")
+    {
+        document.getElementById('passwordSignUp').classList.remove('bg-danger')
+        document.getElementById("error_password").innerHTML=''
+
+    }
+ 
+        if( first_name!=="")
+    {
+        document.getElementById('first_name').classList.remove('bg-danger')
+        document.getElementById("error_first_name").innerHTML=''
+
+    }
+  
+        if( family_name!=="")
+    {
+        document.getElementById('family_name').classList.remove('bg-danger')
+        document.getElementById("error_family_name").innerHTML=''
+
+    }
+
+    if( email==="")
+    {
+        document.getElementById('emailSignUp').classList.add('bg-danger')
+        document.getElementById("error_email").innerHTML='You must enter you email!'
+        error=true
+
+    }
+        if( password==="")
+    {
+        document.getElementById('passwordSignUp').classList.add('bg-danger')
+        document.getElementById("error_password").innerHTML='You must enter you password!'
+        error=true
+
+    }
+ 
+        if( first_name==="")
+    {
+        document.getElementById('first_name').classList.add('bg-danger')
+        document.getElementById("error_first_name").innerHTML='You must enter you first name!'
+        error=true
+
+    }
+  
+        if( family_name==="")
+    {
+        document.getElementById('family_name').classList.add('bg-danger')
+        document.getElementById("error_family_name").innerHTML='You must enter you family name!'
+        error=true
+
+    }
+  
+    /*check if there is a @ is in email*/
+    if(email!=='')
+    {
+
+        var index_search_char1 = email.indexOf('@')
+        var index_search_char2 = email.indexOf('@', (index_search_char1+1))
+        if(index_search_char2 > 0)
+    {
+        /*there is more than one @ in the email, so error*/
+        document.getElementById('emailSignUp').classList.add('bg-danger')
+        document.getElementById('error_email').innerHTML='Your email must have only one "@", please enter a good email!'
+        error=true
+    }
+    else 
+    {
+    if(index_search_char1 < 0)
+    {
+        /*there is no @ in the email, so error*/
+        document.getElementById('error_email').innerHTML='Your email must have a "@",  please enter a good email!'
+        document.getElementById('emailSignUp').classList.add('bg-danger')
+        error=true
+    
+    }
+    }
+   
+        var index_of_point= email.indexOf('.')
+    if(index_of_point < 0)
+    {
+        /*there is no . in the email, so error*/
+        document.getElementById('error_email').innerHTML='You must enter a good email (you have forgetten a "." )!'
+        document.getElementById('emailSignUp').classList.add('bg-danger')
+        error=true
+
+    }
+    }
+
+   /*check if password has at least one capital letter*/
+    if(password !=='')
+    {
+    is_lower_letter= password.toLowerCase()
+    if(is_lower_letter === password){
+        document.getElementById('error_password').innerHTML='Your password must have at least one capital letter!'
+        document.getElementById('passwordSignUp').classList.add('bg-danger')
+        error=true
+
+    }
+    else
+    {
+        is_upper_letters=password.toUpperCase()
+    /*check if password has at least one lewer letter*/
+
+    if(is_upper_letters===password)
+    {
+        document.getElementById('error_password').innerHTML='Your password must have at least one lower letter!'
+        document.getElementById('passwordSignUp').classList.add('bg-danger')
+        error=true
+
+    }
+    /*check if password contain at least one number*/
+    else
+    {
+      var hasNumber= /\d/
+    if(hasNumber.test(password)=== false)
+    {
+        document.getElementById('error_password').innerHTML='Your password must have at least one number!'
+        document.getElementById('passwordSignUp').classList.add('bg-danger')
+        error=true
+
+    }
+    else
+    {
+    length_password=password.length
+    /*check if password have at least 8 character*/
+    if(length_password<8)
+    {
+        document.getElementById('error_password').innerHTML='Your password must have at least 8 caracters including one capital letter, one lowercase letter and one number!'
+        document.getElementById('passwordSignUp').classList.add('bg-danger')
+        error=true
+
+    }
+    }
+    }
+    }
+    }
+console.log(error)
+    if(error=== false)
+    {
+        
+        /*if there is no problems in the fields so, create connection with the server*/
+        //creating a XHR Object
+        let xhr= new XMLHttpRequest();
+        let url="get_info_usersSignUp.php";
+        //open a connection
+        xhr.open("POST",url, true)
+        //send the request header i.e. which type of conent you are sending
+        xhr.setRequestHeader("Content-Type", "application/json");
+        //Create a state change callback
+        xhr.onreadystatechange=function() {
+    
+    if(xhr.readyState==4 && xhr.status ===200)
+    {
+        var textResp=xhr.responseText
+        var myObject=JSON.parse(textResp)
+        myText=myObject.id
+        console.log(myText)
+    if(myText=== -1){
+        /*the email exists in tha database, so error*/
+         alert("Your email already exists in the database, try with another mail or sign in!")
+    }
+    else
+    {
+    if(myText==1)
+    {
+        alert("Your sign up is done successfully , Welcome "+first_name+' '+family_name)
+        $('#signUp').hide(1000)
+
+    }
+    else{
+        /* sign up does not works, problem in the server*/
+    if(myText==-2){
+         alert("There is a problem in the server, pleaste try again")
+    }
+    }
+    }
+    }
+    };
+        //Converting JSON data to string
+        var data=JSON.stringify({"family_name":family_name, "first_name":first_name, "email": email, "password":password});
+        //Sending data with the resquest
+        xhr.send(data);
+    }
+    }
+</script>
+</body>
+</html>
